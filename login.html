@@ -1,0 +1,128 @@
+<html>
+<html>
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="left">
+            <img src="Sales consulting-amico.svg" alt="Illustration">
+        </div>
+        <div class="right">
+            <center><h1>Welcome!</h1></center>
+            <center><h2>Login</h2></center>
+            <form name="myForm" id="loginForm" onsubmit="return validateForm()" method="post">
+                <!-- Email field with HTML5 email validation -->
+                <label for="email">E-mail:</label>
+                <div class="input-container">
+                    <input type="email" name="email" id="email" placeholder="Email" required />
+                    <span class="email-icon">&#9993;</span> <!-- Unicode character for an envelope -->
+                </div>
+
+                <!-- Password field with length validation -->
+                <label for="password">Password:</label>
+                <div class="input-container">
+                    <input type="password" name="Pword" id="password" placeholder="Password" required minlength="6" title="Password must be at least 6 characters long." />
+                    <span class="toggle-password" onclick="togglePasswordVisibility()"><i class="fas fa-eye"></i></span>
+                </div>
+
+                <span class="psw"><a href="forgot password.html">Forgot password?</a></span>
+                <button type="submit" id="loginButton">Login</button>
+                <div id="errorMessage" style="color: red;"></div>
+                <div id="errorMessage"></div>
+                <center><p>Don't have an account? <a href="sign up.html">Sign up</a></p></center>
+            </form>
+        </div>
+    </div>
+    <div id="snackbar">Login Successfully!</div>
+    <script>
+        function validateForm() {
+            var email = document.forms["myForm"]["email"].value;
+            var password = document.forms["myForm"]["Pword"].value;
+            var errorMessage = document.getElementById("errorMessage");
+
+            if (email == "" || email == null) {
+                errorMessage.innerText = "Email must be filled out";
+                return false;
+            }
+            if (password == "" || password == null) {
+                errorMessage.innerText = "Password must be filled out";
+                return false;
+            }
+            return true;
+        }
+
+        function showSnackbar() {
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            setTimeout(function() {
+                x.className = x.className.replace("show", "");
+            }, 3000);
+        }
+
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.querySelector('.toggle-password i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+    </script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDfqrVrG62ubC4GIyDwiIKnTN_tZWi5aB8",
+            authDomain: "offer-website.firebaseapp.com",
+            projectId: "offer-website",
+            storageBucket: "offer-website.appspot.com",
+            messagingSenderId: "650135395969",
+            appId: "1:650135395969:web:336dec714e9901928ef780"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        document.getElementById("loginButton").addEventListener('click', function(e) {
+            e.preventDefault();
+
+            if (!validateForm()) {
+                return;
+            }
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const dbRef = ref(getDatabase());
+            get(child(dbRef, `users/${email.replace('.', '_')}`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    if (userData.password === password) {
+                        showSnackbar();
+                        alert("User Login successfully");
+                        window.location.href = "seller customer.html"; // Redirect to seller customer page
+                    } else {
+                        document.getElementById("errorMessage").innerText = "Incorrect email or password";
+                    }
+                } else {
+                    document.getElementById("errorMessage").innerText = "Incorrect email or password";
+                }
+            }).catch((error) => {
+                document.getElementById("errorMessage").innerText = "Error: " + error.message;
+            });
+        });
+    </script>
+</body>
+</html>

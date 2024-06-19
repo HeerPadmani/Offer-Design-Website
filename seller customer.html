@@ -1,0 +1,64 @@
+<html>
+<head>
+    <title>Seller or Customer</title>
+    <link rel="stylesheet" href="seller customer.css">
+</head>
+<body>
+    <div class="container">
+        <div class="image-section">
+            <!-- This image can be commented out if you prefer to use a background image -->
+            <img src="Cash Payment-rafiki.svg" alt="Illustration">
+        </div>
+        <div class="form-section">
+            <h2>Are you a seller or a customer?</h2>
+            <form id="roleForm" onsubmit="nextStep(event)">
+                <div class="option">
+                    <input type="radio" id="sellerRadio" name="role" value="seller">
+                    <label for="sellerRadio" class="option-box">
+                        <img src="https://cdn-icons-png.flaticon.com/512/4515/4515443.png" alt="Seller Icon">
+                        <b><span>I'm Seller</span></b>
+                        <span class="radio-mark"></span>
+                    </label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="customerRadio" name="role" value="customer">
+                    <label for="customerRadio" class="option-box">
+                        <img src="https://cdn-icons-png.flaticon.com/512/782/782164.png" alt="Customer Icon">
+                        <b><span>I'm Customer</span></b>
+                        <span class="radio-mark"></span>
+                    </label>
+                </div>
+                <br>
+                <br>
+                <a href="offer page.html"><button type="button">Next</button></a>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('sellerRadio').addEventListener('click', function() {
+            console.log('Seller selected');
+        });
+
+        document.getElementById('customerRadio').addEventListener('click', function() {
+            console.log('Customer selected');
+        });
+
+        function nextStep(event) {
+            event.preventDefault();
+            const sellerRadio = document.getElementById('sellerRadio');
+            const customerRadio = document.getElementById('customerRadio');
+            
+            if (sellerRadio.checked) {
+                console.log('Proceeding as Seller');
+                window.location.href = 'seller_page.html'; // Change to your seller page URL
+            } else if (customerRadio.checked) {
+                console.log('Proceeding as Customer');
+                window.location.href = 'customer_page.html'; // Change to your customer page URL
+            } else {
+                console.log('No selection made');
+                alert('Please select a role before proceeding.');
+            }
+        }
+    </script>
+</body>
+</html>

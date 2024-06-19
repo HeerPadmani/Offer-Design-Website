@@ -1,0 +1,138 @@
+/* Global styles */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: flex;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 1px;
+    overflow: hidden;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Styles for image section */
+.image-section {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+}
+
+.image-section img {
+    max-width: 100%;
+    height: 420px;
+    background-color: #567E8B33;
+    ;
+}
+
+/* Styles for form section */
+.form-section {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Styles for form */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styles for options */
+.option {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.option input[type="radio"] {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.option-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    position: relative;
+    height: 50px;
+    width: 300px;
+}
+
+.option-box:hover {
+    border-color: #007bff;
+}
+
+.option-box img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.option-box span {
+    font-size: 16px;
+}
+
+.option input:checked + .option-box {
+    border-color: #0E4759B2;
+}
+
+.radio-mark {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-left: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.option input:checked + .option-box .radio-mark {
+    border-color: #0E4759B2;
+    background-color: #0E4759B2;
+    ;
+}
+
+/* Styles for button */
+button {
+    padding: 10px 20px;
+    background-color: #0E4759B2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    height: 35px;
+    width: 320px;
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+}
